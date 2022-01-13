@@ -1,0 +1,55 @@
+1. API về con vật
+  - Lấy danh sách con vật
+    + method: GET
+    + url: 'http://localhost:8080/animal/getAnimalList'
+    + params: none
+    + body: none
+    + response: {
+      statusCode: number,
+      message: string,
+      content: array (animal list)
+    }
+
+  - Thêm con vật
+    + method: POST
+    + url: 'http://localhost:8080/animal/insertAnimal'
+    + params: none
+    + body: {
+      ten_dv: string,
+      mo_ta: string,
+      dia_diem: string,
+      ma_ho: number,
+      images: files (Danh sách file ảnh)
+    }
+    + response: {
+      statusCode: number,
+      message: string,
+    }
+  
+  - Cập nhật con vật
+    + method: PUT
+    + url: 'http://localhost:8080/animal/updateAnimal'
+    + params: none
+    + body: {
+      ma_dv: number,
+      ten_dv: string,
+      mo_ta: string,
+      dia_diem: string,
+      ma_ho: number,
+    }
+    + response: {
+      statusCode: number,
+      message: string,
+    }
+
+  - Xóa con vật
+    + method: DELETE
+    + url: 'http://localhost:8080/animal/deleteAnimal'
+    + params: {
+      ma_dv: number
+    }
+    + body: none
+    + response: {
+      statusCode: number,
+      message: string,
+    }
