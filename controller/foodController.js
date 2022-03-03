@@ -3,7 +3,6 @@ import foodModel from "../models/foodModel.js"
 
 export const getFood = (req, res) => {
     try {
-
         res.status(200).json({ success: true, results: {} })
     } catch (error) {
         res.status(500).json({ err: error, success: false })

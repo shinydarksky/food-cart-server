@@ -20,7 +20,7 @@ mongooose.connect(URI_DB, { useNewUrlParser: true, useUnifiedTopology: true }).
 	catch((err) => {
 		console.log('Errors' + err)
 	}
-	)
+)
 
 
 
@@ -32,7 +32,5 @@ app.listen(PORT, () => {
 app.use('/auth', authRoute)
 
 app.use('/food', foodRoute)
-
-
 
 app.use('/', homeRoute)
