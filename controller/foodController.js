@@ -34,16 +34,16 @@ export const editFood = async (req, res) => {
 export const areaFood = async (req, res) => {
     try {
         const { area, keyword } = req.body
-
         if (area == 'all') {
-            foodModel.find({name: { $regex: `${keyword}`, $options: 'i' }}).then((data) => {
-                res.status(200).json({ success: true, results: data})
+            foodModel.find({ name: { $regex: `${keyword}`, $options: 'i' } }).then((data) => {
+                res.status(200).json({ success: true, results: data })
             }).catch((error) => {
                 res.status(500).json({ err: error, success: false })
             })
+        } else {
+            const results = await foodModel.find({ area: area, name: { $regex: `${keyword}`, $options: 'i' } })
+            res.status(200).json({ success: true, results: results })
         }
-        const results = await foodModel.find({ area: area, name: { $regex: `${keyword}`, $options: 'i' } })
-        res.status(200).json({ success: true, results: results })
     } catch (error) {
         res.status(500).json({ err: error, success: false })
     }
@@ -55,8 +55,8 @@ export const topicsFood = async (req, res) => {
         const { topic } = req.body
 
         if (area == 'all') {
-            foodModel.find({name: { $regex: `${keyword}`, $options: 'i' }}).then((data) => {
-                res.status(200).json({ success: true, results: data})
+            foodModel.find({ name: { $regex: `${keyword}`, $options: 'i' } }).then((data) => {
+                res.status(200).json({ success: true, results: data })
             }).catch((error) => {
                 res.status(500).json({ err: error, success: false })
             })

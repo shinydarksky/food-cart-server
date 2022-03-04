@@ -1,15 +1,5 @@
-import jwt from "jsonwebtoken"
 import userModel from "../models/userModel.js"
-
-function createUserToken(data){
-    const token = jwt.sign({user:data},'NIENLUAN_NGANH_KTPM') 
-    return token
-}
-
-function checkUserToken(accessToken){
-    const  decoded = jwt.verify(accessToken,'NIENLUAN_NGANH_KTPM')
-    return decoded
-}
+import { checkUserToken, createUserToken } from "./fc.js"
 
 export const loginController = async (req, res) => {
     try {
@@ -23,7 +13,6 @@ export const loginController = async (req, res) => {
     } catch (error) {
         res.status(500).json({ success: false, message: error })
     }
-
 }
 
 export const registerController = (req, res) => {
@@ -31,10 +20,11 @@ export const registerController = (req, res) => {
         const { username, password } = req.body
         const newUser = new userModel({
             username:username,
-            password:password
+            password:password,
         })
         newUser.save()
-
+        const accessToken = createUserToken(newUser)
+        res.status(200).json({ success: true, accessToken })
     } catch (error) {
         res.status(500).json({ success: false, message: error })
     }

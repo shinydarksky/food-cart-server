@@ -5,6 +5,7 @@ import mongooose from 'mongoose'
 import authRoute from './routers/authRoute.js'
 import homeRoute from './routers/homeRoute.js'
 import foodRoute from './routers/foodRoute.js'
+import userRoute from './routers/userRoute.js'
 const app = express()
 const PORT = 8080
 const URI_DB = 'mongodb://localhost:27017/food-cart'
@@ -22,8 +23,6 @@ mongooose.connect(URI_DB, { useNewUrlParser: true, useUnifiedTopology: true }).
 	}
 )
 
-
-
 app.listen(PORT, () => {
 	console.log(`Server running with PORT: ${PORT}`)
 })
@@ -34,3 +33,5 @@ app.use('/auth', authRoute)
 app.use('/food', foodRoute)
 
 app.use('/', homeRoute)
+
+app.use('/user', userRoute)
