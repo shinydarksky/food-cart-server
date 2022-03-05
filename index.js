@@ -27,11 +27,11 @@ app.listen(PORT, () => {
 	console.log(`Server running with PORT: ${PORT}`)
 })
 
+app.use('/', homeRoute)
 
 app.use('/auth', authRoute)
 
+app.use('/user', userRoute)
+
 app.use('/food', foodRoute)
 
-app.use('/', homeRoute)
-
-app.use('/user', userRoute)
