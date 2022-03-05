@@ -44,7 +44,7 @@ export const getUserInforController = async (req, res) => {
             res.status(200).json({ success: true, results: userInfor })
         }
         else {
-            const newInfor = inforModel({
+            const newInfor = new inforModel({
                 userId: id
             }).save()
             res.status(200).json({ success: true, results: newInfor })

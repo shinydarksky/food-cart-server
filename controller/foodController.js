@@ -1,9 +1,10 @@
 import foodModel from "../models/foodModel.js"
 
 
-export const getFood = (req, res) => {
+export const getFood = async (req, res) => {
     try {
-        res.status(200).json({ success: true, results: {} })
+        const listFood = await foodModel.find(req.query)
+        res.status(200).json({ success: true, results: listFood })
     } catch (error) {
         res.status(500).json({ err: error, success: false })
     }
@@ -63,6 +64,15 @@ export const topicsFood = async (req, res) => {
         }
         const results = await foodModel.find({ area: area, name: { $regex: `${keyword}`, $options: 'i' } })
         res.status(200).json({ success: true, results: results })
+    } catch (error) {
+        res.status(500).json({ err: error, success: false })
+    }
+}
+
+export const storeFood = async (req, res) => {
+    try {
+        const listFood = await foodModel.find(req.query)
+        res.status(200).json({ success: true, results: listFood })
     } catch (error) {
         res.status(500).json({ err: error, success: false })
     }

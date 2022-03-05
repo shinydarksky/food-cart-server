@@ -5,7 +5,8 @@ const receiptSchema = Schema({
     listFood: Schema.Types.Array,
     shipperId:Schema.Types.ObjectId,
     discountCode:String,
-    prices:Number
+    prices:Number,
+    location:String
 },{ timestamps: true })
 
 export default mongoose.model('receiptModel', receiptSchema)
