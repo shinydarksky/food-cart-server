@@ -57,7 +57,6 @@ export const getUserInforController = async (req, res) => {
 export const updateUserInforController = async (req, res) => {
     try {
         const { _id, data } = req.body
-        console.log(req.body);
         await inforModel.updateOne({ _id: _id }, data).then((data) => {
             res.status(200).json({ success: true, message: 'Cập nhật thành công' })
         }).catch((error) => {

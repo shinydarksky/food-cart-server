@@ -1,6 +1,5 @@
 import foodModel from "../models/foodModel.js"
 
-
 export const getFood = async (req, res) => {
     try {
         const listFood = await foodModel.find(req.query)
@@ -10,11 +9,15 @@ export const getFood = async (req, res) => {
     }
 }
 
+
 export const addFood = (req, res) => {
     // const { name, description, price, area, image } = req.body
     try {
-        const newFood = new foodModel(req.body)
-        newFood.save()
+        	const { files } = req
+        	const fileNames = Array(...files).map(item=>`http://localhost:8080/images/${item.filename}`)
+        	const newData = {...req.body,images:fileNames}
+            const newFood = new foodModel(newData)
+            newFood.save()
         res.status(200).json({ success: true, results: newFood })
     } catch (error) {
         res.status(500).json({ err: error, success: false })

@@ -21,7 +21,7 @@ mongooose.connect(URI_DB, { useNewUrlParser: true, useUnifiedTopology: true }).
 	catch((err) => {
 		console.log('Errors' + err)
 	}
-)
+	)
 
 app.listen(PORT, () => {
 	console.log(`Server running with PORT: ${PORT}`)
@@ -34,4 +34,11 @@ app.use('/auth', authRoute)
 app.use('/user', userRoute)
 
 app.use('/food', foodRoute)
+
+
+
+// 
+
+
+
 

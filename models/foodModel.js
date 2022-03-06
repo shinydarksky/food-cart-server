@@ -5,7 +5,7 @@ const foodSchema = mongoose.Schema({
     name: String,
     description: String,
     price: { default: 0, type: mongoose.Schema.Types.Number },
-    image: String,
+    images: mongoose.Schema.Types.Array,
     area: { default: 'ho-chi-minh', type: String },
     buyCount: { default: 0, type: mongoose.Schema.Types.Number },
     storeId:Schema.Types.ObjectId,
