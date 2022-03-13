@@ -6,6 +6,8 @@ import authRoute from './routers/authRoute.js'
 import homeRoute from './routers/homeRoute.js'
 import foodRoute from './routers/foodRoute.js'
 import userRoute from './routers/userRoute.js'
+import addressRoute from './routers/addressRoute.js'
+import receiptRouter from './routers/receiptRoute.js'
 const app = express()
 const PORT = 8080
 const URI_DB = 'mongodb://localhost:27017/food-cart'
@@ -35,7 +37,9 @@ app.use('/user', userRoute)
 
 app.use('/food', foodRoute)
 
+app.use('/address', addressRoute)
 
+app.use('/receipt', receiptRouter)
 
 // 
 

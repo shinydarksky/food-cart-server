@@ -11,9 +11,6 @@ function checkUserToken(accessToken){
     return decoded
 }
 
-
-
-
 export {
     createUserToken,
     checkUserToken,
