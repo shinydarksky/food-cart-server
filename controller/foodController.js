@@ -1,3 +1,4 @@
+import addressModel from "../models/addressModel.js"
 import foodModel from "../models/foodModel.js"
 
 export const getFood = async (req, res) => {
@@ -47,7 +48,12 @@ export const areaFood = async (req, res) => {
                 res.status(500).json({ err: error, success: false })
             })
         } else {
-            const results = await foodModel.find({ area: area, name: { $regex: `${keyword}`, $options: 'i' } })
+            const addressArea = await addressModel.find({ area: area })
+            let results = []
+            for(let area of addressArea){
+                const dataFood = await foodModel.find({ area: area._id, name: { $regex: `${keyword}`, $options: 'i' } })
+                results.push(...dataFood)
+            }
             res.status(200).json({ success: true, results: results })
         }
     } catch (error) {
@@ -91,12 +97,12 @@ export const getFoodFromCart = async (req, res) => {
         for (let food of listFoodId) {
             let foodItem = await foodModel.findOne({ _id: food.foodId })
             listFood.push({
-                _id:foodItem._id,
-                name:foodItem.name,
-                num:food.num,
-                price:foodItem.price,
-                storeId:foodItem.storeId,
-                area:foodItem.area
+                _id: foodItem._id,
+                name: foodItem.name,
+                num: food.num,
+                price: foodItem.price,
+                storeId: foodItem.storeId,
+                area: foodItem.area
             })
         }
         res.status(200).json({ success: true, results: listFood })
