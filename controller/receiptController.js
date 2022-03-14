@@ -2,7 +2,7 @@ import receiptModel from '../models/receiptModel.js'
 
 export const getReceipt = async (req, res) => {
     try {
-        const listOrder = await receiptModel.find(req.query)
+        const listOrder = await receiptModel.find(req.query).$where('this.status>=0 && this.status<3')
         res.status(200).json({ success: true, results: listOrder })
     } catch (error) {
         res.status(500).json({ err: error, success: false })
