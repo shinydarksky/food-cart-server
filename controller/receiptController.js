@@ -11,7 +11,7 @@ export const getReceipt = async (req, res) => {
 
 export const createReceipt = (req, res) => {
     try {
-        const { userId, addressLocation, listFood, prices } = req.body
+        const { userId, addressLocation, listFood, prices,discountCode } = req.body
         const newReceipt = new receiptModel({
             userId: userId,
             listFood: listFood,
