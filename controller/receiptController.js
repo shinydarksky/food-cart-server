@@ -1,8 +1,14 @@
 import receiptModel from '../models/receiptModel.js'
-
+import foodModel from '../models/foodModel.js'
 export const getReceipt = async (req, res) => {
     try {
-        const listOrder = await receiptModel.find(req.query).$where('this.status>=0 && this.status<3')
+        const { status } = req.query
+        let listOrder = []
+        if (status) {
+            listOrder = await receiptModel.find(req.query)
+        } else {
+            listOrder = await receiptModel.find(req.query).$where('this.status>=0 && this.status<3')
+        }
         res.status(200).json({ success: true, results: listOrder })
     } catch (error) {
         res.status(500).json({ err: error, success: false })
@@ -11,7 +17,7 @@ export const getReceipt = async (req, res) => {
 
 export const createReceipt = (req, res) => {
     try {
-        const { userId, addressLocation, listFood, prices,discountCode } = req.body
+        const { userId, addressLocation, listFood, prices, discountCode } = req.body
         const newReceipt = new receiptModel({
             userId: userId,
             listFood: listFood,
@@ -44,3 +50,25 @@ export const shipperGetReceipt = async (req, res) => {
         res.status(500).json({ err: error, success: false })
     }
 }
+
+export const getChartStore = async (req, res) => {
+    try {
+        const { storeId } = req.query
+        const listFood = await foodModel.find({storeId:storeId})
+        const listReceipt = await receiptModel.find()
+        let rawFoodReceipt = []
+        for(let receiptItem of listReceipt){
+            rawFoodReceipt.push(...receiptItem.listFood)
+        }
+        rawFoodReceipt = rawFoodReceipt.flat(2)
+        let results = []
+        for(let foodItem of listFood){
+            const item = rawFoodReceipt.filter(item=>item._id==foodItem._id)
+            results.push(...item)
+        }
+        res.status(200).json({ success: true, results: results })
+    } catch (error) {
+        res.status(500).json({ err: error, success: false })
+    }
+}
+
