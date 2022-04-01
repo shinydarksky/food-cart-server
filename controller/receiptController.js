@@ -1,5 +1,6 @@
 import receiptModel from '../models/receiptModel.js'
 import foodModel from '../models/foodModel.js'
+import { sum } from './fc.js'
 export const getReceipt = async (req, res) => {
     try {
         const { status } = req.query
@@ -51,11 +52,13 @@ export const shipperGetReceipt = async (req, res) => {
     }
 }
 
+
+
 export const getChartStore = async (req, res) => {
     try {
         const { storeId } = req.query
         const listFood = await foodModel.find({storeId:storeId})
-        const listReceipt = await receiptModel.find()
+        const listReceipt = await receiptModel.find({status:3})
         let rawFoodReceipt = []
         for(let receiptItem of listReceipt){
             rawFoodReceipt.push(...receiptItem.listFood)
@@ -64,7 +67,10 @@ export const getChartStore = async (req, res) => {
         let results = []
         for(let foodItem of listFood){
             const item = rawFoodReceipt.filter(item=>item._id==foodItem._id)
-            results.push(...item)
+            if(item.length>0){
+                let price = sum([...item],'price') || 0
+                results.push({...item[0],num:item.length,price:price})
+            }
         }
         res.status(200).json({ success: true, results: results })
     } catch (error) {
