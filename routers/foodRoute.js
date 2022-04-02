@@ -6,7 +6,8 @@ import {
     areaFood,
     storeFood,
     getFoodFromCart,
-    getAddressFood 
+    getAddressFood,
+    getSpecialFood
 } from '../controller/foodController.js'
 import { upload } from '../middleware/uploadFile.js'
 
@@ -28,5 +29,7 @@ router.get('/store', storeFood)
 router.post('/cart', getFoodFromCart)
 
 router.get('/address', getAddressFood )
+
+router.get('/specials', getSpecialFood )
 
 export default router
