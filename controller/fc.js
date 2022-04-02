@@ -16,7 +16,6 @@ function sum(obj, field) {
     for (let et of obj) {
         sum += et[field]
     }
-    console.log(sum)
     return sum
 }
 

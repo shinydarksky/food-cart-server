@@ -115,7 +115,6 @@ export const getAddressFood = async (req, res) => {
     try {
         const { _id } = req.query
         const addressItem = await addressModel.findOne({_id:_id})
-        console.log(addressItem );
         res.status(200).json({ success: true, results:addressItem })
     } catch (error) {
         res.status(500).json({ err: error, success: false })
