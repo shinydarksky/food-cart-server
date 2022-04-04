@@ -8,6 +8,7 @@ const receiptSchema = Schema({
     prices:Number,
     addressLocation:String,
     note:String,
+    phone:String,
     status:{type:Number,default:0}
 },{ timestamps: true })
 

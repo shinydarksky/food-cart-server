@@ -18,12 +18,13 @@ export const getReceipt = async (req, res) => {
 
 export const createReceipt = (req, res) => {
     try {
-        const { userId, addressLocation, listFood, prices, discountCode } = req.body
+        const { userId, addressLocation, listFood, prices, discountCode,phone } = req.body
         const newReceipt = new receiptModel({
             userId: userId,
             listFood: listFood,
             prices: prices,
-            addressLocation: addressLocation
+            addressLocation: addressLocation,
+            phone:phone
         })
         newReceipt.save()
         res.status(200).json({ success: true, message: 'Đặt hàng thành công' })
