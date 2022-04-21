@@ -10,7 +10,10 @@ import addressRoute from './routers/addressRoute.js'
 import receiptRouter from './routers/receiptRoute.js'
 const app = express()
 const PORT = 8080
+
 const URI_DB = 'mongodb://localhost:27017/food-cart'
+// const URI_DB = 'mongodb+srv://thanhloc:xwibVtU65Z4Dl6X1@cluster0.cbei7.gcp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+
 
 app.use(cors())
 app.use(express.static('public'))
